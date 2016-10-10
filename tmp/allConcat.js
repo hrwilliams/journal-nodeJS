@@ -5,7 +5,9 @@ $(document).ready(function() {
     event.preventDefault();
     var body = $('#body').val();
     var simpleEntry = new Entry("this is a journal entry");
-    var output = simpleEntry.wordCount(body);
-    $('#count').append(output);
+    var wordCountOutput = simpleEntry.wordCount(body);
+    var vowelCountOutput = simpleEntry.vowelCount(body);
+    $('#wordCount').append(wordCountOutput);
+    $('#vowelCount').append(vowelCountOutput);
   });
 });

@@ -5,9 +5,23 @@ function Entry(title, body) {
 }
 
 Entry.prototype.wordCount = function(body) {
-  var output = body.split(" ").length.toString();
-  return output;
+  var wordCount = body.split(" ").length.toString();
+  return wordCount;
 };
+
+Entry.prototype.vowelCount = function(body) {
+  var characters = body.toLowerCase().split("")
+  // var characters = ["e", "r", "o", "t"]
+  var vowelCount = 0
+  characters.forEach(function(character){
+    // if (character === ("e"||"o")) {
+    // old attempt in comment, RegExp handles it super well below
+    if (character.match(/^(a|e|i|o|u)$/)) {
+      vowelCount += 1;
+    }
+  })
+  return vowelCount;
+}
 
 exports.entryModule = Entry;
 
@@ -19,8 +33,10 @@ $(document).ready(function() {
     event.preventDefault();
     var body = $('#body').val();
     var simpleEntry = new Entry("this is a journal entry");
-    var output = simpleEntry.wordCount(body);
-    $('#count').append(output);
+    var wordCountOutput = simpleEntry.wordCount(body);
+    var vowelCountOutput = simpleEntry.vowelCount(body);
+    $('#wordCount').append(wordCountOutput);
+    $('#vowelCount').append(vowelCountOutput);
   });
 });
 
